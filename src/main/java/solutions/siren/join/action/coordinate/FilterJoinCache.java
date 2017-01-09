@@ -32,7 +32,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class FilterJoinCache {
 
-  private final Cache<Integer, CacheEntry> cache;
+  private final Cache<String, CacheEntry> cache;
 
   // TODO: Make this configurable
   private static final int CACHE_SIZE = 16;

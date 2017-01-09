@@ -18,6 +18,7 @@
  */
 package solutions.siren.join.action.coordinate;
 
+import org.elasticsearch.common.logging.Loggers;
 import solutions.siren.join.action.terms.TermsByQueryRequest;
 import org.elasticsearch.ElasticsearchParseException;
 import org.elasticsearch.common.xcontent.XContentBuilder;
@@ -26,6 +27,8 @@ import org.elasticsearch.common.xcontent.XContentType;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * A filter join node of the abstract syntax tree. It contains a reference to the source map
@@ -48,7 +51,7 @@ public class FilterJoinNode extends AbstractNode {
   /**
    * A unique cache id based on the source map.
    */
-  private final int cacheId;
+  private final String cacheId;
 
   private State state;
   private FilterJoinVisitor.TermsByQueryActionListener listener;
@@ -69,7 +72,7 @@ public class FilterJoinNode extends AbstractNode {
     this.state = State.WAITING;
     // Generate the cache id based on the hashCode of the source map, before it is modified.
     // This should not be sensitive to the order of the fields, but this might be sensitive to the order of arrays.
-    this.cacheId = self.hashCode();
+    this.cacheId = self.toString();
   }
 
   /**
@@ -78,7 +81,7 @@ public class FilterJoinNode extends AbstractNode {
    * and by {@link FilterJoinVisitor#convertToBinaryTermsFilter(FilterJoinNode)} as cache key for the
    * binary terms filter.
    */
-  int getCacheId() {
+  String getCacheId() {
     return cacheId;
   }
 
