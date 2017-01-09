@@ -18,17 +18,14 @@
  */
 package solutions.siren.join.action.coordinate;
 
-import org.elasticsearch.common.logging.Loggers;
-import solutions.siren.join.action.terms.TermsByQueryRequest;
 import org.elasticsearch.ElasticsearchParseException;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentType;
+import solutions.siren.join.action.terms.TermsByQueryRequest;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * A filter join node of the abstract syntax tree. It contains a reference to the source map
